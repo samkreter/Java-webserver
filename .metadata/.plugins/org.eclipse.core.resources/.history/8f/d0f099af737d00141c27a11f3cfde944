@@ -1,0 +1,15 @@
+package server;
+
+public class Server extends Thread{
+
+	public Server(int listen_port, Server_Starter to_send_message){
+		message_to = to_send_message;
+		port = listen_port ;
+		
+		this.start();
+	}
+	
+	private void s(String s2){
+		message_to.send_message_to_window(s2);
+	}
+}
