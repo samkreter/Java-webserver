@@ -56,19 +56,11 @@ public class Server extends Thread{
 				//prepare outstream to the client, sending header and request file
 				DataOutputStream output = new DataOutputStream(connectionSocket.getOutputStream());
 				
-				//actully handling the request
-				http_handler(input,output);
-				
 			}catch(Exception e){
-				s("\nError:" + e.getMessage());
+				
 			}
-		}//infite loop to catch
+		}
 		
-		
-	}
-	
-	//implementation of simple http
-	private void http_handler(){
 		
 	}
 	
