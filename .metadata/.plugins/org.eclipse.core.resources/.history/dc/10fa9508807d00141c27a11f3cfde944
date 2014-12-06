@@ -147,7 +147,7 @@ public class Server extends Thread{
 			}
 			
 			//create header with everything is just lovely on this side man
-			output.writeBytes(construct_http_header(202,0));
+			output.writeByte(construct_http_header(202,0));
 			
 			//if its a head request don't print the body 
 			if(method == 1){
@@ -206,7 +206,7 @@ public class Server extends Thread{
 	    //what kind of file is being transmitted. You may have experienced
 	    //if the server is miss configured it may result in
 	    //pictures displayed as text!
-	    switch (fileType) {
+	    switch (file_type) {
 	      //plenty of types for you to fill in
 	      case 0:
 	        break;

@@ -147,7 +147,7 @@ public class Server extends Thread{
 			}
 			
 			//create header with everything is just lovely on this side man
-			output.writeBytes(construct_http_header(202,0));
+			output.writeByte(construct_http_header(202,0));
 			
 			//if its a head request don't print the body 
 			if(method == 1){

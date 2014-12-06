@@ -147,86 +147,12 @@ public class Server extends Thread{
 			}
 			
 			//create header with everything is just lovely on this side man
-			output.writeBytes(construct_http_header(202,0));
+			output.writeByte(construct_http_header(202,0));
 			
-			//if its a head request don't print the body 
-			if(method == 1){
-				while(true){
-					int b = requestedFile.read();
-					if(b == -1){
-						break; //end of file
-					}
-					output.write(b);
-				}
-			}
+		}catch(Exception e){
 			
-			//close all leaks 
-			output.close();
-			requestedFile.close();
-		}catch(Exception e){}
-		
-		
-	}
-	
-	private String construct_http_header(int returnCode, int fileType){
-		String s = "HTTP/1.0";
-		
-		switch(returnCode){
-		case 200:
-			s = s + "200 OK";
-			break;
-		case 400:
-			s = s + "400 Bad request";
-			break;
-		case 403:
-			s = s + "403 Forbidden";
-			break;
-		case 404:
-			s = s + "404 File not here man....Sorry....But you messed up";
-			break;
-		case 418:
-			s = s + "418 I'm a little tea pot";
-			break;
-		case 500:
-			s = s + "500 Internal Server Error";
-			break;
-		case 501:
-			s = s + "501 not implemented";
-			break;
 		}
 		
-		s = s + "\r\n"; //other header files
-		s = s + "Connection: close\r\n"; //we can't handle persistent connections
-	    s = s + "Server: SimpleHTTPtutorial v0\r\n"; //server name
-	    
-	    //Construct the right Content-Type for the header.
-	    //This is so the browser knows what to do with the
-	    //file, you may know the browser dosen't look on the file
-	    //extension, it is the servers job to let the browser know
-	    //what kind of file is being transmitted. You may have experienced
-	    //if the server is miss configured it may result in
-	    //pictures displayed as text!
-	    switch (fileType) {
-	      //plenty of types for you to fill in
-	      case 0:
-	        break;
-	      case 1:
-	        s = s + "Content-Type: image/jpeg\r\n";
-	        break;
-	      case 2:
-	        s = s + "Content-Type: image/gif\r\n";
-	      case 3:
-	        s = s + "Content-Type: application/x-zip-compressed\r\n";
-	      default:
-	        s = s + "Content-Type: text/html\r\n";
-	        break;
-	    }
-
-	    ////so on and so on......
-	    s = s + "\r\n"; //this marks the end of the httpheader
-	    //and the start of the body
-	    //ok return our newly created header!
-	    return s;
 	}
 	
 	
