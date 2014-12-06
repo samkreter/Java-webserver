@@ -1,7 +1,6 @@
 package server;
 
-import java.io.*;
-import java.net.*;
+import java.net.ServerSocket;
 
 public class Server extends Thread{
 
@@ -41,24 +40,7 @@ public class Server extends Thread{
 		
 		//infinite loop to wait for connections, process requests and send responses
 		while(true){
-			s("\nReady, Waiting for requests....");
 			
-			try{
-				//waits until someone connects to the port being listened on  
-				Socket connectionSocket = serverSocket.accept();
-				//get clients ipAdress
-				InetAddress client = connectionSocket.getInetAddress(); 
-				s(client.getHostName()+" connect to server\n");
-				
-				//Read the http request form the client through the sockets
-				BufferedReader input = new BufferedReader(new InputStreamReader(
-						connectionSocket.getInputStream()));
-				//prepare outstream to the client, sending header and request file
-				DataOutputStream output = new DataOutputStream(connectionSocket.getOutputStream());
-				
-			}catch(Exception e){
-				
-			}
 		}
 		
 		
