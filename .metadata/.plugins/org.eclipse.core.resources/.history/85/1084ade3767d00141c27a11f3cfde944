@@ -26,24 +26,6 @@ public class Server extends Thread{
 		ServerSocket serverSocket = null;
 		
 		s("The simple httpserver v. 0000000000\nCoded by Sam Kreter");
-		
-		try{
-			//send message to gui
-			s("Trying to bind to port "+Integer.toString(port)+"....");
-			//make and bind socket to the port
-			serverSocket = new ServerSocket(port);
-		}catch(Exception e){
-			s("\nFatel Error: "+e.getMessage());
-			return;
-		}
-		s("OK!\n");
-		
-		//infinite loop to wait for connections, process requests and send responses
-		while(true){
-			
-		}
-		
-		
 	}
 	
 	
