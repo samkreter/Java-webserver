@@ -1,0 +1,76 @@
+package server;
+
+import java.io.*;
+import java.net.*;
+
+public class Server extends Thread{
+
+	private Server_Starter message_to; //the starter class, needed for gui
+	 private int port; //port we are going to listen to
+	
+	public Server(int listen_port, Server_Starter to_send_message_to){
+		message_to = to_send_message_to;
+		port = listen_port ;
+		
+		this.start();
+	}
+	
+	//alias for typing 
+	private void s(String s2){
+		message_to.send_message_to_window(s2);
+	}
+	
+	//overridden from the Thread class
+	public void run(){
+		//inside thread separate formt he gui
+		
+		ServerSocket serverSocket = null;
+		
+		s("The simple httpserver v. 0000000000\nCoded by Sam Kreter");
+		
+		try{
+			//send message to gui
+			s("Trying to bind to port "+Integer.toString(port)+"....");
+			//make and bind socket to the port
+			serverSocket = new ServerSocket(port);
+		}catch(Exception e){
+			s("\nFatel Error: "+e.getMessage());
+			return;
+		}
+		s("OK!\n");
+		
+		//infinite loop to wait for connections, process requests and send responses
+		while(true){
+			s("\nReady, Waiting for requests....");
+			
+			try{
+				//waits until someone connects to the port being listened on  
+				Socket connectionSocket = serverSocket.accept();
+				//get clients ipAdress
+				InetAddress client = connectionSocket.getInetAddress(); 
+				s(client.getHostName()+" connect to server\n");
+				
+				//Read the http request form the client through the sockets
+				BufferedReader input = new BufferedReader(new InputStreamReader(
+						connectionSocket.getInputStream()));
+				//prepare outstream to the client, sending header and request file
+				DataOutputStream output = new DataOutputStream(connectionSocket.getOutputStream());
+				
+				//actully handling the request
+				http_handler(input,output);
+				
+			}catch(Exception e){
+				s("\nError:" + e.getMessage());
+			}
+		}//infite loop to catch
+		
+		
+	}
+	
+	//implementation of simple http
+	private void http_handler(){
+		
+	}
+	
+	
+}
