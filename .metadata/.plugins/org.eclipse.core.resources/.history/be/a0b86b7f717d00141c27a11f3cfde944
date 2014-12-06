@@ -69,7 +69,7 @@ public class Server_Starter extends JFrame{
 	    
 	    //create the actual serverstuff,
 	    //all that is implemented in another class
-	    new server(listen_port.intValue(), this);
+	    //new server(listen_port.intValue(), this);
 	    
 	    
 	}

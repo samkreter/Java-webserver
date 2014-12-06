@@ -52,37 +52,10 @@ public class Server_Starter extends JFrame{
 	    
 	    this.addWindowListener(new java.awt.event.WindowAdapter() {
 	        public void windowClosing(WindowEvent e) {
-	          this_windowClosed(e);
+	          windowClosed(e);
 	        }
 	      });
 	    
-	    jscrollPane1.getViewport().add(jTextArea2);
-	    jpanel1.add(jscrollPane1);
-	    this.getContentPane().add(jpanel1, BorderLayout.EAST);
-
-	    //tveak the apearance
-	    this.setVisible(true);
-	    this.setSize(420, 350);
-	    this.setResizable(false);
-	    //make sure it is drawn
-	    this.validate();
-	    
-	    //create the actual serverstuff,
-	    //all that is implemented in another class
-	    new server(listen_port.intValue(), this);
-	    
 	    
 	}
-	
-	//exit program when "X" is pressed.
-	  void this_windowClosed(WindowEvent e) {
-	    System.exit(1);
-	  }
-	  
-	  //this is a method to get messages from the actual
-	  //server to the window
-	  public void send_message_to_window(String s) {
-	    jTextArea2.append(s);
-	  }
-	  
 }
